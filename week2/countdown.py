@@ -20,6 +20,14 @@ def askVowelsAndConsonants() -> tuple[int, int]:
             vowelCount += 1
     return (vowelCount, 9-vowelCount)
 
+def askLetters() -> str:
+    tmp = []
+    for i in range(9):
+        tmp.append(input(f"letter {i+1} --> "))
+    tmp = sorted(tmp)
+    letters = "".join(tmp)
+    print(letters)
+    return letters
 
 def vowelCount(word: str) -> int:
     vowelCount = 0
@@ -45,6 +53,7 @@ def wordIsValid(word: str, desiredVowelsAndConsonants: tuple[int, int]) -> bool:
     return True
 
 
+# for vowels and consonants version
 def findValidWords(wordList: list[str], desiredVowelsAndConsonants: tuple[int, int]) -> list[str]:
     validWords = []
     for word in wordList:
@@ -52,12 +61,24 @@ def findValidWords(wordList: list[str], desiredVowelsAndConsonants: tuple[int, i
             validWords.append(word)
     return validWords
 
+# for letters version
+def findFullyValidWords(wordList: list[str], letters: str) -> list[str]:
+    validWords = []
+    for word in wordList:
+        if sorted(word) == letters:
+            validWords.append(word)
+    return validWords
+    # TODO: NEED TO CHECK FOR WORDS WHICH ARE CONTAINED WITHIN LETTERS, NOT JUST 9 FOR 9 MATCHES
+
 
 def main():
-    desiredVowelsAndConsonants = askVowelsAndConsonants()
-    wordList = getWords(FILE_PATH)
-    validWords = findValidWords(wordList, desiredVowelsAndConsonants)
-    print(validWords)
+    # desiredVowelsAndConsonants = askVowelsAndConsonants()
+    # wordList = getWords(FILE_PATH)
+    # validWords = findValidWords(wordList, desiredVowelsAndConsonants)
+    # print(validWords)
+
+    letters = askLetters()
+
     return
     
 
