@@ -53,6 +53,18 @@ def wordIsValid(word: str, desiredVowelsAndConsonants: tuple[int, int]) -> bool:
     return True
 
 
+def isSubstring(substringCandidate: str, mainString: str) -> bool:
+    counts = [0]*26
+    for char in mainString:
+        counts[ord(char) - ord('a')] += 1
+    for char in substringCandidate:
+        index = ord(char) - ord('a')
+        counts[index] -= 1
+        if counts[index] < 0:
+            return False
+    return True
+
+
 # for vowels and consonants version
 def findValidWords(wordList: list[str], desiredVowelsAndConsonants: tuple[int, int]) -> list[str]:
     validWords = []
@@ -71,14 +83,37 @@ def findFullyValidWords(wordList: list[str], letters: str) -> list[str]:
     # TODO: NEED TO CHECK FOR WORDS WHICH ARE CONTAINED WITHIN LETTERS, NOT JUST 9 FOR 9 MATCHES
 
 
+def displayResults(validWords: list[str]) -> None:
+    print(f"There were {len(validWords)} words found with the letters provided.")
+    bestAnswers = sorted(validWords, key=len, reverse=True)
+    bestWords = []
+    try:
+        i = 0
+        while i < 5:
+            bestWords.append(bestAnswers[i])
+            i += 1
+        print(f"Here are the best answers: {bestWords}")
+    except IndexError:
+        pass
+
+
 def main():
+    # for vowels and consonants version:
+
     # desiredVowelsAndConsonants = askVowelsAndConsonants()
     # wordList = getWords(FILE_PATH)
     # validWords = findValidWords(wordList, desiredVowelsAndConsonants)
     # print(validWords)
 
-    letters = askLetters()
+    # for real version
 
+    letters = askLetters()
+    wordList = getWords(FILE_PATH)
+
+    validWords = [word for word in wordList if isSubstring(word, letters)]
+
+    displayResults(validWords)
+    
     return
     
 
