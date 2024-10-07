@@ -31,15 +31,6 @@ def isSubstring(substringCandidate: str, mainString: str) -> bool:
     return True
 
 
-def findFullyValidWords(wordList: list[str], letters: str) -> list[str]:
-    validWords = []
-    for word in wordList:
-        if sorted(word) == letters:
-            validWords.append(word)
-    return validWords
-    # TODO: NEED TO CHECK FOR WORDS WHICH ARE CONTAINED WITHIN LETTERS, NOT JUST 9 FOR 9 MATCHES
-
-
 def displayResults(validWords: list[str]) -> None:
     print(f"There were {len(validWords)} words found with the letters provided.")
     bestAnswers = sorted(validWords, key=len, reverse=True)
